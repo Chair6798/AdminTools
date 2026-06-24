@@ -10,6 +10,7 @@ namespace AT
     {
         public override void Draw()
         {
+            windowHeight = 25 + 5 + 35 * 3;
             mainScroll = GUI.BeginScrollView(
                 new Rect(0, 20, 150, windowHeight - (20)),
                 mainScroll,

@@ -42,7 +42,7 @@ namespace AT
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                GUI.Window(1, new Rect(Screen.width / 2 - 75, Screen.height / 2 - 200, 150, 400), Draw, "AT by CoolChair");
+                GUI.Window(1, new Rect(Screen.width / 2 - 75, Screen.height / 2 - CurrentMenu.windowHeight/2, 150, CurrentMenu.windowHeight), Draw, "AT by CoolChair");
             }
         }
         void Draw(int i)

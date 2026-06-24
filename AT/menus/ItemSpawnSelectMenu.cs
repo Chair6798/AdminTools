@@ -4,9 +4,10 @@ namespace AT
 {
     public class ItemSpawnSelectMenu : Menu
     {
-        public new int windowHeight = 25 + 5 + 35 * 5;
+        
         public override void Draw()
         {
+            windowHeight = 25 + 35 + 5 + 35 * 5;
             if (GUI.Button(new Rect(5, 20, 140, 30), "Back"))
             {
                 MenuManager.Set("Main");
@@ -33,6 +34,11 @@ namespace AT
             }
             i++;
             if (GUI.Button(new Rect(5, CalcY(i), 140, 30), "Drones"))
+            {
+                MenuManager.Set("ItemSpawn", ConvertLib.pack(i));
+            }
+            i++;
+            if (GUI.Button(new Rect(5, CalcY(i), 140, 30), "Upgrades"))
             {
                 MenuManager.Set("ItemSpawn", ConvertLib.pack(i));
             }
