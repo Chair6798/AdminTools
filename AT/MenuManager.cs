@@ -72,6 +72,13 @@ namespace AT
 
                 case "PlayerSelect":
                     return new PlayerSelectMenu((Action<PlayerControl>)additional[0], (Action)additional[1]);
+
+                case "Players":
+                    return new PlayersMenu();
+
+                case "AllPlayersFuncs":
+                    return new AllPlayersFuncsMenu();
+
                 default:
                     return new Menu();
             }

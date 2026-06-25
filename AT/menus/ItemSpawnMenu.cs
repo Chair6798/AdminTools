@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.MessageBox;
 namespace AT
 {
     public class ItemSpawnMenu : SpawnMenu
@@ -11,26 +12,28 @@ namespace AT
         }
         public override void Draw()
         {
-            if (GUI.Button(new Rect(5, 20, 140, 30), "<color=#FF7F7F>Back</color>"))
+            ButtonStyle style = MenuManager.style;
+            if (GUI.Button(new Rect(style.paddingLR, 15, style.width, style.height), "<color=#FF7F7F>Back</color>"))
             {
                 MenuManager.Set("ItemSpawnSelect");
             }
+            
             mainScroll = GUI.BeginScrollView(
-                new Rect(0, 20 + 30, 150, windowHeight - (20 + 30)),
+                new Rect(0, 15 + 30, style.width + style.paddingLR * 2, windowHeight - (15 - 30)),
                 mainScroll,
-                new Rect(0, 0, 150, 5 + 35 * GetCount()));
+                new Rect(0, 0, style.width+style.paddingLR*2, style.paddingVert + (style.height + style.paddingVert) * GetCount()));
 
             DrawList();
             GUI.EndScrollView();
         }
         public override void DrawList()
         {
-            bool all = GetItems() == ItemLib.GetAll();
+            ButtonStyle style = MenuManager.style;
             int i = 0;
             foreach (Item item in GetItems())
             {
                 var str = item.itemName;
-                if (GUI.Button(new Rect(5, CalcY(i), 140, 30), str) ){ObjectLib.Spawn(item); }
+                if (GUI.Button(new Rect(style.paddingLR, CalcY(i), style.width, style.height), str)){ObjectLib.Spawn(item); }
                 i++;
             }
         }

@@ -21,9 +21,9 @@ namespace AT
                 MenuManager.Set("Main");
             }
             mainScroll = GUI.BeginScrollView(
-                new Rect(0, 20 + 30, 150, windowHeight-(20+30)),
+                new Rect(0, 15 + 30, style.width + style.paddingLR * 2, windowHeight - (15 - 30)),
                 mainScroll,
-                new Rect(0, 0, 150, 5 + 35 * GetCount()));
+                new Rect(0, 0, style.width + style.paddingLR * 2, style.paddingVert + (style.height + style.paddingVert) * GetCount()));
 
             DrawList();
             GUI.EndScrollView();

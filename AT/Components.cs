@@ -1,7 +1,8 @@
 ﻿using Photon.Pun;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Utilities;
+using System.Collections.ObjectModel;
+
 namespace AT.Components
 {
     public class EnemyController : MonoBehaviour
@@ -83,6 +84,10 @@ namespace AT.Components
                 Kill();
             }
         }
+        public void SetTumble(bool value)
+        {
+            tumble.TumbleSet(value, false);
+        }
         public void SetHealth(int amount)
         {
             if (amount<=0)
@@ -111,11 +116,45 @@ namespace AT.Components
             }
         }
 
+        public void Teleport(Vector3 targetPosition, Quaternion targetRotation)
+        {
+            if (!Alive())
+            {
+                avatar.Spawn(targetPosition, Quaternion.identity);
+            }
+            if (IsTumbling())
+            {
+                ObjectLib.Transform(tumble.gameObject, targetPosition, targetRotation);
+            }
+            ObjectLib.Transform(head.gameObject, targetPosition, targetRotation);
+        }
+        public void Teleport(Vector3 targetPosition)
+        {
+            Teleport(targetPosition, Quaternion.identity);
+        }
 
         //STATIC
+
+        public static Collection<PlayerControl> GetAll(Collection<PlayerControl> exclude = null)
+        {
+            var all = new Collection<PlayerControl>();
+            foreach (PlayerAvatar avatar in GameDirector.instance.PlayerList)
+            {
+                var p = Get(avatar);
+                if (exclude != null && exclude.Contains(p))
+                    continue;
+                all.Add(p);
+            }
+            return all;
+        }
+
         public static PlayerControl GetLocal()
         {
             return SemiFunc.PlayerAvatarLocal().GetComponentInParent<PlayerControl>();
+        }
+        public static Collection<PlayerControl> GetLocalCollection()
+        {
+            var coll = new Collection<PlayerControl>(); coll.Add(GetLocal()); return coll;
         }
         public static PlayerControl Get(PlayerAvatar avatar)
         {
@@ -124,6 +163,32 @@ namespace AT.Components
         public static PlayerControl Get(string SteamId)
         {
             return Get(SemiFunc.PlayerAvatarGetFromSteamID(SteamId));
+        }
+
+        public static void KillAll(Collection<PlayerControl> exclude = null)
+        {
+            foreach (PlayerControl control in GetAll(exclude))
+            {
+                control.Kill();
+            }
+        }
+        public static void ReviveAll(Collection<PlayerControl> exclude = null)
+        {
+            foreach (PlayerControl control in GetAll(exclude))
+            {
+                control.Revive();
+            }
+        }
+        public static void TeleportAll(Vector3 targetPosition, Quaternion targetRotation, Collection<PlayerControl> exclude = null)
+        {
+            foreach (PlayerControl control in GetAll(exclude))
+            {
+                control.Teleport(targetPosition, targetRotation);
+            }
+        }
+        public static void TeleportAll(Vector3 targetPosition, Collection<PlayerControl> exclude = null)
+        {
+            TeleportAll(targetPosition, Quaternion.identity, exclude);
         }
     }
     public class ItemController : MonoBehaviour

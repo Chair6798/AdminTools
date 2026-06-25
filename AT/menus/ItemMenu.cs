@@ -9,16 +9,20 @@ namespace AT
         public override void Draw()
         {
             windowHeight = 25 + 30 + 35 * 3;
-            if (GUI.Button(new Rect(5, 20, 140, 30), "Back"))
+
+            
+            ButtonStyle style = MenuManager.style;
+
+            if (GUI.Button(new Rect(style.paddingLR, 20, style.width, style.height), "<color=#FF7F7F>Back</color>"))
             {
                 MenuManager.Set("Main");
             }
             mainScroll = GUI.BeginScrollView(
-                new Rect(0, 20 + 30, 150, windowHeight - (20 + 30)),
+                new Rect(0, 20 + style.height, style.width + style.paddingLR * 2, windowHeight - (20 - style.height)),
                 mainScroll,
-                new Rect(0, 0, 150, 5 + 35 * 3));
+                new Rect(0, 0, style.width + style.paddingLR * 2, style.paddingVert + (style.height + style.paddingVert) * 3));
             int i = 0;
-            if (GUI.Button(new Rect(5, CalcY(i), 140, 30), "Spawn"))
+            if (GUI.Button(new Rect(style.paddingLR, CalcY(i), style.width, style.height), "Spawn"))
             {
                 MenuManager.Set("ItemSpawnSelect");
             }
