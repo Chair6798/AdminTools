@@ -7,15 +7,15 @@ namespace AT
         
         public override void Draw()
         {
-            windowHeight = 25 + 35 + 5 + 35 * 5;
+            windowHeight = 20 + 35 + 35 * 6;
             if (GUI.Button(new Rect(5, 20, 140, 30), "Back"))
             {
-                MenuManager.Set("Main");
+                MenuManager.Set("Item");
             }
             mainScroll = GUI.BeginScrollView(
                 new Rect(0, 20 + 30, 150, windowHeight - (20 + 30)),
                 mainScroll,
-                new Rect(0, 0, 150, 5 + 35 * 5));
+                new Rect(0, 0, 150, 5 + 35 * 6));
 
             int i = 0;
             if (GUI.Button(new Rect(5, CalcY(i), 140, 30), "Grenades"))

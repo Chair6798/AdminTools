@@ -5,9 +5,10 @@ namespace AT
 {
     public class ItemMenu : Menu
     {
-        public new int windowHeight = 25 + 5 + 35 * 3;
+        
         public override void Draw()
         {
+            windowHeight = 25 + 30 + 35 * 3;
             if (GUI.Button(new Rect(5, 20, 140, 30), "Back"))
             {
                 MenuManager.Set("Main");

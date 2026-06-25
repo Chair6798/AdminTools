@@ -1,5 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using Photon.Pun;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Localization.SmartFormat.Utilities;
 namespace AT.Components
 {
     public class EnemyController : MonoBehaviour
@@ -110,6 +112,52 @@ namespace AT.Components
         public static PlayerControl Get(string SteamId)
         {
             return Get(SemiFunc.PlayerAvatarGetFromSteamID(SteamId));
+        }
+    }
+    public class ItemController : MonoBehaviour
+    {
+        ItemBattery IBattery;
+        ItemEquippable IEquippable;
+        ItemToggle IToggle;
+        ItemUpgrade IUpgrade;
+
+        void Awake()
+        {
+            IBattery = GetComponent<ItemBattery>();
+            IEquippable = GetComponent<ItemEquippable>();
+            IToggle = GetComponent<ItemToggle>();
+            IUpgrade = GetComponent<ItemUpgrade>();
+        }
+        public bool Toggleable()
+        {
+            return IToggle != null;
+        }
+        public bool Equippable()
+        {
+            return IEquippable != null;
+        }
+        public bool IsEquipped()
+        {
+            return Equippable() && IEquippable.IsEquipped();
+        }
+        public bool IsUpgrade()
+        {
+            return IUpgrade != null;
+        }
+        public void Toggle(int player = -1)
+        {
+            if (Toggleable())
+                IToggle.ToggleItem(!IToggle.toggleState, player);
+        }
+        public void Unequip()
+        {
+            if (Equippable()&&IsEquipped())
+                IEquippable.RequestUnequip();
+        }
+
+        public void Equip(PlayerControl player, int spot)
+        {
+            IEquippable.RequestEquip(spot, player.avatar.physGrabber.photonView.ViewID);
         }
     }
 }

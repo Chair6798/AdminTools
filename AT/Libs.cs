@@ -241,6 +241,7 @@ namespace AT
         static Collection<Item> Guns;
         static Collection<Item> Orbs;
         static Collection<Item> Drones;
+        static Collection<Item> Upgrades;
         static Collection<Item> Other;
 
         [Obsolete("Use ObjectLib.Spawn")]
@@ -271,6 +272,8 @@ namespace AT
                 case 3:
                     return Drones;
                 case 4:
+                    return Upgrades;
+                case 5:
                     return Other;
 
 
@@ -293,6 +296,7 @@ namespace AT
             Guns = new Collection<Item>();
             Orbs = new Collection<Item>();
             Drones = new Collection<Item>();
+            Upgrades = new Collection<Item>();
             Other = new Collection<Item>();
         }
         static void Sort(Item item)
@@ -313,9 +317,14 @@ namespace AT
                 Drones.Add(item);
                 return;
             }
-            if (name.Contains("Orbs"))
+            if (name.Contains("Orb"))
             {
                 Orbs.Add(item);
+                return;
+            }
+            if (name.Contains("Upgrade"))
+            {
+                Upgrades.Add(item);
                 return;
             }
             Other.Add(item);
