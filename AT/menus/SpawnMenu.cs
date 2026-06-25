@@ -15,7 +15,8 @@ namespace AT
         }
         public override void Draw()
         {
-            if(GUI.Button(new Rect(5, 20, 140, 30), "Back"))
+            var style = MenuManager.style;
+            if (GUI.Button(new Rect(style.paddingLR, 20, style.width, style.height), "<color=#FF7F7F>Back</color>"))
             {
                 MenuManager.Set("Main");
             }

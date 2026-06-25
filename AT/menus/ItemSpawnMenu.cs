@@ -11,7 +11,7 @@ namespace AT
         }
         public override void Draw()
         {
-            if (GUI.Button(new Rect(5, 20, 140, 30), "Back"))
+            if (GUI.Button(new Rect(5, 20, 140, 30), "<color=#FF7F7F>Back</color>"))
             {
                 MenuManager.Set("ItemSpawnSelect");
             }

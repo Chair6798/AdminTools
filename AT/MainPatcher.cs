@@ -56,7 +56,7 @@ namespace AT
             GameObject.DontDestroyOnLoad(go);
             go.AddComponent<PhotonView>();
             go.AddComponent<ObjectLib>();
-            go.AddComponent<AdminManager>();
+            go.AddComponent<RightManager>();
             go.AddComponent<MenuManager>();
             ItemLib.Init();
         }

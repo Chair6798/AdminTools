@@ -115,7 +115,7 @@ namespace AT
         {
             if (!SemiFunc.IsMasterClientOrSingleplayer())
                 return;
-            if (AdminManager.IsAdmin(SemiFunc.PlayerGetSteamID(SemiFunc.PlayerAvatarGetFromPhotonPlayer(_info.Sender))))
+            if (RightManager.IsAdmin(SemiFunc.PlayerGetSteamID(SemiFunc.PlayerAvatarGetFromPhotonPlayer(_info.Sender))))
             {
                 HostSpawn(prefab, position, rotation);
             }
@@ -125,7 +125,7 @@ namespace AT
         {
             if (!SemiFunc.IsMasterClientOrSingleplayer())
                 return;
-            if (AdminManager.IsAdmin(SemiFunc.PlayerGetSteamID(SemiFunc.PlayerAvatarGetFromPhotonPlayer(_info.Sender))))
+            if (RightManager.IsAdmin(SemiFunc.PlayerGetSteamID(SemiFunc.PlayerAvatarGetFromPhotonPlayer(_info.Sender))))
             {
                 HostDestroy(obj);
             }

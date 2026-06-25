@@ -24,6 +24,12 @@ namespace AT.Components
 
         public PlayerLocalCamera camera;
 
+        public bool isLocal = false;
+
+        public string steamID;
+
+        public string playerName;
+
         void Awake()
         {
             avatar = GetComponentInChildren<PlayerAvatar>();
@@ -31,6 +37,12 @@ namespace AT.Components
             tumble = GetComponentInChildren<PlayerTumble>();
             head = GetComponentInChildren<PlayerDeathHead>();
             camera = GetComponentInChildren<PlayerLocalCamera>();
+
+            isLocal = (avatar == SemiFunc.PlayerGetLocal());
+            
+
+            steamID = (string)DataLib.GetValue(avatar, "steamID");
+            playerName = SemiFunc.PlayerGetName(avatar);
         }
 
         public Vector3 GetPosition()
@@ -116,10 +128,11 @@ namespace AT.Components
     }
     public class ItemController : MonoBehaviour
     {
-        ItemBattery IBattery;
-        ItemEquippable IEquippable;
-        ItemToggle IToggle;
-        ItemUpgrade IUpgrade;
+        public ItemBattery IBattery;
+        public ItemEquippable IEquippable;
+        public ItemToggle IToggle;
+        public ItemUpgrade IUpgrade;
+
 
         void Awake()
         {

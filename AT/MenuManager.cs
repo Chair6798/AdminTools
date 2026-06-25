@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
+using AT.Components;
 namespace AT
 {
     public class MenuManager : MonoBehaviour
@@ -14,6 +14,9 @@ namespace AT
 
         public static string CurrentMenuId;
         public static Menu CurrentMenu;
+
+        public static ButtonStyle style;
+
         public static void ToggleRender()
         {
             Render= !Render;
@@ -33,6 +36,7 @@ namespace AT
         void Awake()
         {
             instance = this;
+            style = new ButtonStyle();
             Set("Main");
         }
 
@@ -42,7 +46,7 @@ namespace AT
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                GUI.Window(1, new Rect(Screen.width / 2 - 75, Screen.height / 2 - CurrentMenu.windowHeight/2, 150, CurrentMenu.windowHeight), Draw, "AT by CoolChair");
+                GUI.Window(1, new Rect(Screen.width / 2 - 100, Screen.height / 2 - CurrentMenu.windowHeight/2, 200, CurrentMenu.windowHeight), Draw, "AT by CoolChair");
             }
         }
         void Draw(int i)
@@ -66,6 +70,8 @@ namespace AT
                 case "ItemSpawnSelect":
                     return new ItemSpawnSelectMenu();
 
+                case "PlayerSelect":
+                    return new PlayerSelectMenu((Action<PlayerControl>)additional[0], (Action)additional[1]);
                 default:
                     return new Menu();
             }

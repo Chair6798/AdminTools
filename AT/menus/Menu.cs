@@ -20,7 +20,8 @@ namespace AT
 
         public int CalcY(int i, bool fullcalc=false)
         {
-            return 5 + 35 * i + (fullcalc?20:0);
+            var style = MenuManager.style;
+            return style.paddingVert + (style.height + style.paddingVert) * i + (fullcalc?20:0);
         }
     }
 }

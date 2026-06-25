@@ -24,9 +24,9 @@ namespace AT
             return SemiFunc.PlayerGetFromSteamID(SteamID);
         }
     }
-    public class AdminManager : MonoBehaviour
+    public class RightManager : MonoBehaviour
     {
-        public static AdminManager instance;
+        public static RightManager instance;
         public static Collection<Admin> Admins;
         public static bool Admin = false;
 
@@ -99,9 +99,11 @@ namespace AT
             {
                 return;
             }
-            if (SemiFunc.PlayerAvatarGetFromPhotonPlayer(_info.Sender))
+            if (SemiFunc.PlayerAvatarGetFromPhotonPlayer(_info.Sender)==SemiFunc.PlayerGetLocal())
             {
-                MenuManager.Render = false;
+                Admin = admin;
+                if (!Admin)
+                    MenuManager.Render = false;
             }
         }
     }
