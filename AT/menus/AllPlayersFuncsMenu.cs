@@ -41,6 +41,23 @@ namespace AT
                 PlayerControl.TeleportAll(PlayerControl.GetLocal().GetPosition(), PlayerControl.GetLocalCollection());
             }
             i++;
+            if (GUI.Button(new Rect(style.paddingLR, CalcY(i), style.width, style.height), "Teleport To Truck"))
+            {
+                var tp = new Vector3(0, 0, 0);
+                if (WorldLib.GetWorldPosition("truck", ref tp))
+                    PlayerControl.TeleportAll(tp, excludeMe ? PlayerControl.GetLocalCollection() : null);
+            }
+            i++;
+            if (GUI.Button(new Rect(style.paddingLR, CalcY(i), style.width, style.height), "Drop"))
+            {
+                PlayerControl.SetTumbleAll(true, excludeMe ? PlayerControl.GetLocalCollection() : null);
+            }
+            i++;
+            if (GUI.Button(new Rect(style.paddingLR, CalcY(i), style.width, style.height), "Wake Up"))
+            {
+                PlayerControl.SetTumbleAll(false, excludeMe ? PlayerControl.GetLocalCollection() : null);
+            }
+            i++;
             GUI.EndScrollView();
         }
     }

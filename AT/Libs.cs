@@ -47,6 +47,40 @@ namespace AT
             return a;
         }
     }
+    public static class WorldLib
+    {
+        public static void CloseQuota()
+        {
+
+        }
+        public static void ExploreQuota()
+        {
+
+        }
+        public static bool GetWorldPosition(string placeId, ref Vector3 output)
+        {
+            switch (placeId)
+            {
+                case ("quota"):
+                    return false;
+
+                case ("truck"):
+                    TruckHealer th = TruckHealer.instance;
+                    if (th == null)
+                    {
+                        return false;
+                    }
+                    output = th.gameObject.transform.position + new Vector3(0,-3,0);
+                    return true;
+
+                default:
+                    return false;
+
+            }
+        }
+
+
+    }
     public static class UILib
     {
         public static GUIStyle Style(TextAnchor all, int fontsize)

@@ -1,7 +1,8 @@
 ﻿using Photon.Pun;
-using System.Runtime.InteropServices;
-using UnityEngine;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
+using TMPro;
+using UnityEngine;
 
 namespace AT.Components
 {
@@ -44,6 +45,17 @@ namespace AT.Components
 
             steamID = (string)DataLib.GetValue(avatar, "steamID");
             playerName = SemiFunc.PlayerGetName(avatar);
+        }
+        void Update()
+        {
+            if (head==null)
+            {
+                head = GetComponentInChildren<PlayerDeathHead>();
+            }
+            if (tumble==null)
+            {
+                tumble = GetComponentInChildren<PlayerTumble>();
+            }
         }
 
         public Vector3 GetPosition()
@@ -190,6 +202,15 @@ namespace AT.Components
         {
             TeleportAll(targetPosition, Quaternion.identity, exclude);
         }
+
+        public static void SetTumbleAll(bool value, Collection<PlayerControl> exclude = null)
+        {
+            foreach (PlayerControl control in GetAll(exclude))
+            {
+                control.SetTumble(value);
+            }
+        }
+
     }
     public class ItemController : MonoBehaviour
     {
